@@ -10,7 +10,6 @@ import java.util.function.Predicate.isEqual
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@Suppress("DEPRECATION")
 class CalculatorTest {
     @Test
     fun shouldReturnSumOfTwoOperandsAsResultWhenTwoOperandsIsGivenToAdditionFunction() {
@@ -21,5 +20,12 @@ class CalculatorTest {
         assertEquals(4.0,result,0.0)
     }
 
+    @Test
+    fun shouldReturnDifferenceOfTwoOperandsAsResultWhenTwoOperandsIsGivenToSubtractionFunction() {
+        val calculator = Calculator()
 
+        val result = calculator.subtraction(3.0, 2.0)
+
+        assertEquals(1.0,result,0.0)
+    }
 }
