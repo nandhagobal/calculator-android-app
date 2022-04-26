@@ -3,7 +3,6 @@ package com.example.myapplication
 import org.junit.Test
 
 import org.junit.Assert.*
-import java.util.function.Predicate.isEqual
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,20 +11,22 @@ import java.util.function.Predicate.isEqual
  */
 class CalculatorTest {
     @Test
-    fun shouldReturnSumOfTwoOperandsAsResultWhenTwoOperandsIsGivenToAdditionFunction() {
+    fun shouldReturnSumOfTwoOperandsAsResultWhenTwoOperandsIsGivenToAddFunction() {
         val calculator = Calculator();
 
-        val result = calculator.Addition(2.0, 2.0)
+        val result = calculator.add(2.0, 2.0)
 
         assertEquals(4.0,result,0.0)
     }
 
     @Test
-    fun shouldReturnDifferenceOfTwoOperandsAsResultWhenTwoOperandsIsGivenToSubtractionFunction() {
+    fun shouldReturnDifferenceOfTwoOperandsAsResultWhenTwoOperandsIsGivenToSubtractFunction() {
         val calculator = Calculator()
 
-        val result = calculator.subtraction(3.0, 2.0)
+        val result = calculator.subtract(3.0, 2.0)
 
         assertEquals(1.0,result,0.0)
     }
+
+
 }
