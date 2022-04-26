@@ -28,5 +28,12 @@ class CalculatorTest {
         assertEquals(1.0,result,0.0)
     }
 
+    @Test
+    fun shouldReturnMultipleOfTwoOperandsAsResultWhenTwoOperandsIsGivenToMultiplyFunction() {
+        val calculator = Calculator()
 
+        val result = calculator.multiply(2.0, 1.0)
+
+        assertEquals(2.0,result,0.0)
+    }
 }
