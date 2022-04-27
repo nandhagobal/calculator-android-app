@@ -67,6 +67,12 @@ class CalculatorTest {
 
         assertEquals(10.0,result,0.0)
 
+    }
 
+    @Test(expected =InSufficientOperatorException::class)
+    fun shouldThrowInSufficientOperatorExceptionWhenNumberOfOperatorIsTwoOrMoreLessThenNumberOfOperands() {
+        val calculator = Calculator()
+        val result =
+            calculator.calculateMultipleOperation(arrayOf(1.0, 2.0, 3.0, 4.0), arrayOf('+', '-'))
     }
 }

@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import java.lang.ArithmeticException
 
 class Calculator {
     fun add(num1: Double, num2: Double): Double {
@@ -21,6 +20,7 @@ class Calculator {
 
     fun calculateMultipleOperation(operands: Array<Double>, operators: Array<Char>) : Double {
         var result =0.0
+        if(operands.size > operators.size+1) throw InSufficientOperatorException()
         result = operands[0]
         for(i in 1 until operands.size){
             var operator = operators[i-1]
