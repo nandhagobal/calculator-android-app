@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import com.example.myapplication.Exception.InSufficientOperatorException
+import com.example.myapplication.utility.Calculator
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -69,7 +71,7 @@ class CalculatorTest {
 
     }
 
-    @Test(expected =InSufficientOperatorException::class)
+    @Test(expected = InSufficientOperatorException::class)
     fun shouldThrowInSufficientOperatorExceptionWhenNumberOfOperatorIsTwoOrMoreLessThenNumberOfOperands() {
         val calculator = Calculator()
         val result =

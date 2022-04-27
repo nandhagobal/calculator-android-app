@@ -1,4 +1,6 @@
-package com.example.myapplication
+package com.example.myapplication.utility
+
+import com.example.myapplication.Exception.InSufficientOperatorException
 
 
 class Calculator {
