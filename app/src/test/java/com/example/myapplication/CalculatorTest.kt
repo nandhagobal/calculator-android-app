@@ -3,6 +3,7 @@ package com.example.myapplication
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.lang.ArithmeticException
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -35,5 +36,25 @@ class CalculatorTest {
         val result = calculator.multiply(2.0, 1.0)
 
         assertEquals(2.0,result,0.0)
+    }
+
+    @Test
+    fun shouldReturnDivisionOfTwoOperandsAsResultWhenTwoOperandsIsGivenToDivideFunction() {
+        val calculator = Calculator()
+
+        val result = calculator.divide(2.0, 1.0)
+
+        assertEquals(2.0,result,0.0)
+    }
+
+    @Test
+    fun shouldReturnInfinityWhenZeroASSecondOperandIsGivenToDivideFunction() {
+        val calculator = Calculator()
+
+        val result = calculator.divide(3.0, 0.0)
+
+        assertEquals(Double.POSITIVE_INFINITY,result,0.0)
+
+
     }
 }
