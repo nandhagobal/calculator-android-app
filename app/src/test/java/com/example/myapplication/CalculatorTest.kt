@@ -3,7 +3,6 @@ package com.example.myapplication
 import org.junit.Test
 
 import org.junit.Assert.*
-import java.lang.ArithmeticException
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -54,6 +53,19 @@ class CalculatorTest {
         val result = calculator.divide(3.0, 0.0)
 
         assertEquals(Double.POSITIVE_INFINITY,result,0.0)
+
+    }
+
+    @Test
+    fun shouldReturnSingleValueAsResultWhenArrayOfOperandsAndOperationsIsGivenToCalculateMultipleOperationFunction() {
+        val calculator = Calculator()
+
+        val result = calculator.calculateMultipleOperation(
+            arrayOf(2.0, 3.0, 4.0, 5.0, 6.0),
+            arrayOf('+', '+', '-', '+')
+        )
+
+        assertEquals(10.0,result,0.0)
 
 
     }
