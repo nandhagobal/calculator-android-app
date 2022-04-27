@@ -6,72 +6,48 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.myapplication.R
-import java.lang.ArithmeticException
+import com.example.myapplication.utility.Calculator
+import com.example.myapplication.utility.OperandParser
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var equal: Button
-    private lateinit var textView: TextView
-    private lateinit var delete : Button
-    private lateinit var dot : Button
+    private lateinit var equalButton: Button
+    private lateinit var displayTextView: TextView
+    private lateinit var deleteButton : Button
+    private lateinit var decimalButton : Button
     private var isDot = false
+    private val calculator = Calculator()
+    private val operandParser = OperandParser()
 
-    private var operation: Char? = null
+    private var operations= ArrayList<Char>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textView = findViewById(R.id.textBox)
-        equal = findViewById(R.id.equal)
-        delete = findViewById(R.id.del)
-        dot = findViewById(R.id.dot)
+        displayTextView = findViewById(R.id.textBox)
+        equalButton = findViewById(R.id.equal)
+        deleteButton = findViewById(R.id.del)
+        decimalButton = findViewById(R.id.dot)
 
 
 
-        delete.setOnClickListener{
-            val expression = textView.text
-            textView.text = expression.substring(0,expression.length-1)
+        deleteButton.setOnClickListener{
+            val expression = displayTextView.text
+            displayTextView.text = expression.substring(0,expression.length-1)
         }
 
-        equal.setOnClickListener {
-            var result =0.0
-//            (text,operation)
-            when (operation) {
-                '+' -> {
-                    val operand = textView.text.split(operation.toString())
-                    result = operand[0].toDouble() + operand[1].toDouble()
-                    textView.text = result.toString()
-                }
-                '-' -> {
-                    val operand = textView.text.split(operation.toString())
-                    result = operand[0].toDouble() - operand[1].toDouble()
-                    textView.text = result.toString()
-                }
-                '/' -> {
-                    try {
-                        val operand = textView.text.split(operation.toString())
-                        result = operand[0].toDouble() / operand[1].toDouble()
-                        textView.text = result.toString()
-                    } catch (e: ArithmeticException) {
-                        textView.text = "Infinity"
-                    }
-                }
-                '*' -> {
-                    val operand = textView.text.split(operation.toString())
-                    result = operand[0].toDouble() * operand[1].toDouble()
-                    textView.text = result.toString()
-                }
-            }
-            if(textView.text.endsWith(".0")){
-                val expression = textView.text
-                textView.text = expression.substring(0,expression.length-2)
-            }
-            operation = null
+        equalButton.setOnClickListener {
+            val expression  = displayTextView.text
+            val operands = operandParser.parse(expression.toString())
+            var result = calculator.calculateMultipleOperation(operands, operations).toString()
+            operations.removeAll(operations)
+            if(result.endsWith(".0")) result = result.substring(0,result.length-2)
+            displayTextView.text = result
         }
 
-        dot.setOnClickListener{
+        decimalButton.setOnClickListener{
             if(!isDot) {
-                textView.append(".")
+                displayTextView.append(".")
                 isDot = true
             }
         }
@@ -81,20 +57,21 @@ class MainActivity : AppCompatActivity() {
 
 
     fun onDigitButtonClicked(view: View) {
-        textView.append((view as Button).text)
+        displayTextView.append((view as Button).text)
     }
 
     fun onClear(view: View) {
-        textView.text = ""
+        displayTextView.text = ""
     }
 
-    fun onOperator(view: View) {
-        val expression =textView.text
+    fun onOperatorButtonClicked(view: View) {
+        val expression =displayTextView.text
+
         if(expression.isNotEmpty()) {
-            if (!expression.contains("*") && !expression.contains("/") && !expression.contains("+") && !expression.contains("-"))
+            if (!expression.endsWith("*") && !expression.endsWith("/") && !expression.endsWith("+") && !expression.endsWith("-") && !expression.endsWith("."))
             {
-                textView.append((view as Button).text)
-                operation = view.text[0]
+                displayTextView.append((view as Button).text)
+                operations.add(view.text[0])
                 isDot = false
             }
         }

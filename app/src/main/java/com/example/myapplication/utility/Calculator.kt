@@ -20,9 +20,9 @@ class Calculator {
             return num1/num2
     }
 
-    fun calculateMultipleOperation(operands: Array<Double>, operators: Array<Char>) : Double {
+    fun calculateMultipleOperation(operands: ArrayList<Double>, operators: ArrayList<Char>) : Double {
         var result =0.0
-        if(operands.size > operators.size+1) throw InSufficientOperatorException()
+        if(operands.size > operators?.size+1) throw InSufficientOperatorException()
         result = operands[0]
         for(i in 1 until operands.size){
             var operator = operators[i-1]
